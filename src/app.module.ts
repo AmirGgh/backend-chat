@@ -6,9 +6,11 @@ import { UserModule } from './user/user.module';
 import { GroupModule } from './group/group.module';
 import { BotAiModule } from './bot-ai/bot-ai.module';
 import { ChatGateway } from './chat/chat.gateway';
-
+import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
+    // mongo configoretion
     ConfigModule.forRoot({
       load: [mongoConfig], // Load the mongoConfig object into ConfigModule
     }),
@@ -19,9 +21,11 @@ import { ChatGateway } from './chat/chat.gateway';
       }),
       inject: [ConfigService],
     }),
+    PassportModule.register({ session: true }),
     UserModule,
     GroupModule,
     BotAiModule,
+    AuthModule,
   ],
   providers: [ChatGateway],
 })
