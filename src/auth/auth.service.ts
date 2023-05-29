@@ -13,16 +13,19 @@ export class AuthService {
         console.log('AuthService:')
         console.log(details)
         const user = await this.userModel.findOne({ email: details.email })
-        console.log(user)
         if (user) {
+            console.log(user)
             return user
         }
         console.log('user not found... creating')
-        const newUser = this.userModel.create(details)
+        const newUser = await this.userModel.create(details)
+        console.log(newUser)
         return newUser
     }
     async findUser(id: string) {
         const user = await this.userModel.findById({ id })
+        console.log("findUser")
+        console.log(user)
         return user
     }
 }

@@ -1,4 +1,5 @@
 export type UserDetails = {
-    displayName: string
+    username: string
+    fullname: string
     email: string
 }

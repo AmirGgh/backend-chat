@@ -2,6 +2,7 @@ import { PassportSerializer } from "@nestjs/passport"
 import { Inject, Injectable } from "@nestjs/common"
 import { User } from "src/user/user.schema";
 import { AuthService } from "../auth.service";
+import { UserDetails } from "src/utills/types";
 
 @Injectable()
 export class SessionSerializer extends PassportSerializer {
@@ -10,8 +11,10 @@ export class SessionSerializer extends PassportSerializer {
     ) {
         super();
     }
-    serializeUser(user: User, done: Function) {
+    serializeUser(user: UserDetails, done: Function) {
+        console.log(user)
         console.log('serialize user')
+        console.log(user)
         done(null, user)
     }
     async deserializeUser(payload: any, done: Function) {

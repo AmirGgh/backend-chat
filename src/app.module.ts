@@ -8,16 +8,18 @@ import { BotAiModule } from './bot-ai/bot-ai.module';
 import { ChatGateway } from './chat/chat.gateway';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
+
 @Module({
   imports: [
-    // mongo configoretion
     ConfigModule.forRoot({
-      load: [mongoConfig], // Load the mongoConfig object into ConfigModule
+      load: [mongoConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get('mongo.uri'), // Access the URI from the mongoConfig object
+        uri: configService.get('mongo.uri'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
       }),
       inject: [ConfigService],
     }),
