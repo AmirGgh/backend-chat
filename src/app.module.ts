@@ -6,8 +6,6 @@ import { UserModule } from './user/user.module';
 import { GroupModule } from './group/group.module';
 import { BotAiModule } from './bot-ai/bot-ai.module';
 import { ChatGateway } from './chat/chat.gateway';
-import { AuthModule } from './auth/auth.module';
-import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -23,11 +21,9 @@ import { PassportModule } from '@nestjs/passport';
       }),
       inject: [ConfigService],
     }),
-    PassportModule.register({ session: true }),
     UserModule,
     GroupModule,
     BotAiModule,
-    AuthModule,
   ],
   providers: [ChatGateway],
 })
